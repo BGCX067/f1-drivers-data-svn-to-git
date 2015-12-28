@@ -1,0 +1,34 @@
+<configuration>
+
+    <!-- Solo Desarrollo -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level | %logger{5} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log APP, rollover diario -->
+    <appender name="appLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/F1LAT/f1lat.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/F1LAT/f1lat.%d{yyyy-MM-dd}.txt</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level | %logger{5} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+	<logger name="com.pochoF1" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="appLog"/>
+    </root>
+    
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="appLog"/>
+    </root>
+
+</configuration>

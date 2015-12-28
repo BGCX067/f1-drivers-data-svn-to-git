@@ -1,0 +1,297 @@
+<%@ page import="java.util.Date"%>
+<%@ page import="com.pochoF1.enums.Equipos"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<html>
+<head>
+<jsp:include page="head.jsp"></jsp:include>
+<link rel="stylesheet" href="assets/css/compiled/index.css" type="text/css" media="screen" />
+</head>
+<body>
+	<header class="navbar navbar-inverse" role="banner">
+		<div class="navbar-header">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+				<span class="sr-only">Open Menu</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="home"> <img src="assets/img/logo.png" alt="logo" />
+			</a>
+		</div>
+	</header>
+	<div id="sidebar-nav">
+		<ul id="dashboard-menu">
+			<li class="active">
+				<div class="pointer">
+					<div class="arrow"></div>
+					<div class="arrow_border"></div>
+				</div> <a href="home"> <i class="icon-home"></i> <span>Home</span>
+			</a>
+			</li>
+			<li><a href="showRaces"> <i class="icon-calendar"></i> <span>Race Details</span>
+			</a></li>
+			<!-- Keeps to have an example of dropdown <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>Users</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="user-list.html">User list</a></li>
+                    <li><a href="new-user.html">New user form</a></li>
+                    <li><a href="user-profile.html">User profile</a></li>
+                </ul>
+            </li>-->
+		</ul>
+	</div>
+	<!-- end sidebar -->
+	<!-- main container -->
+	<div class="content">
+		<div id="pad-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="clearfix pull-left">
+						Driver Championship -
+						<fmt:formatDate type="date" value="${anioPiloto}" pattern="yyyy" />
+					</h4>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-12 well well-sm">
+					<c:choose>
+						<c:when test="${not errorPiloto}">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Position</th>
+											<th>Driver</th>
+											<th>Nationality</th>
+											<th>Team</th>
+											<th>Points</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="resultadoPiloto" items="${resultadosPilotos}">
+											<tr>
+												<td>${resultadoPiloto.posicion}</td>
+														<td>${resultadoPiloto.nombre}</td>
+														<td>${resultadoPiloto.nacionalidad}</td>
+														<td>
+															<c:choose>
+																<c:when test="${resultadoPiloto.equipo eq 'RBR'}">
+																	<img height="30px" src="assets/img/Teams/red-bull.png" alt="REDBULL" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'FERRARI'}">
+																	<img height="30px" src="assets/img/Teams/ferrari.png" alt="FERRARI" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'MERCEDES'}">
+																	<img height="30px" src="assets/img/Teams/mercedes.png" alt="MERCEDES" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'LOTUS'}">
+																	<img height="30px" src="assets/img/Teams/lotus.png" alt="LOTUS" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'MCLAREN'}">
+																	<img height="30px" src="assets/img/Teams/mclaren.png" alt="MCLAREN" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'FORCEINDIA'}">
+																	<img height="30px" src="assets/img/Teams/force-india.png" alt="FORCEINDIA" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'SAUBER'}">
+																	<img height="30px" src="assets/img/Teams/sauber.png" alt="SAUBER" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'TORO_ROSSO'}">
+																	<img height="30px" src="assets/img/Teams/toro-rosso.png" alt="TORO_ROSSO" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'WILLIAMS'}">
+																	<img height="30px" src="assets/img/Teams/williams.png" alt="WILLIAMS" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'MARUSSIA'}">
+																	<img height="30px" src="assets/img/Teams/marussia.png" alt="MARUSSIA" />
+																</c:when>
+																<c:when test="${resultadoPiloto.equipo eq 'CATERHAM'}">
+																	<img height="30px" src="assets/img/Teams/caterham.png" alt="CATERHAM" />
+																</c:when>
+																<c:otherwise></c:otherwise>
+															</c:choose>&nbsp;${resultadoPiloto.equipo.equipo}										
+														</td>
+														<td>${resultadoPiloto.puntaje}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<h4>Driver's Standings cannot be loaded right now.</h4>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-md-7">
+					<h4 class="clearfix pull-left">
+						Constructor Championship -
+						<fmt:formatDate type="date" value="${anioEquipo}" pattern="yyyy" />
+					</h4>
+				</div>
+				<div class="col-md-4 col-md-offset-1">
+					<h4 class="clearfix pull-left">Current Race</h4>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-7 well well-sm">
+					<c:choose>
+						<c:when test="${not errorEquipos}">
+							<div class="table-responsive">
+								<table class="table tableConstructor table-striped">
+									<thead>
+										<tr>
+											<th>Position</th>
+											<th>Team</th>
+											<th>Points</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="resultadoEquipo" items="${resultadosEquipos}">
+											<tr>
+												<td>${resultadoEquipo.posicion}</td>
+												<td><c:choose>
+														<c:when test="${resultadoEquipo.equipo eq 'RBR'}">
+															<img height="65px" src="assets/img/Teams/red-bull.png" alt="REDBULL" title="REDBULL" />
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'FERRARI'}">
+															<img height="65px" src="assets/img/Teams/ferrari.png" alt="FERRARI" title="FERRARI"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'MERCEDES'}">
+															<img height="65px" src="assets/img/Teams/mercedes.png" alt="MERCEDES" title="MERCEDES"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'LOTUS'}">
+															<img height="65px" src="assets/img/Teams/lotus.png" alt="LOTUS" title="LOTUS"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'MCLAREN'}">
+															<img height="65px" src="assets/img/Teams/mclaren.png" alt="MCLAREN" title="MCLAREN"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'FORCEINDIA'}">
+															<img height="65px" src="assets/img/Teams/force-india.png" alt="FORCEINDIA" title="FORCE INDIA"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'SAUBER'}">
+															<img height="65px" src="assets/img/Teams/sauber.png" alt="SAUBER" title="SAUBER"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'TORO_ROSSO'}">
+															<img height="65px" src="assets/img/Teams/toro-rosso.png" alt="TORO_ROSSO" title="TORO ROSSO"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'WILLIAMS'}">
+															<img height="65px" src="assets/img/Teams/williams.png" alt="WILLIAMS" title="WILLIAMS"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'MARUSSIA'}">
+															<img height="65px" src="assets/img/Teams/marussia.png" alt="MARUSSIA" title="MARUSSIA"/>
+														</c:when>
+														<c:when test="${resultadoEquipo.equipo eq 'CATERHAM'}">
+															<img height="65px" src="assets/img/Teams/caterham.png" alt="CATERHAM" title="CATERHAM"/>
+														</c:when>
+														<c:otherwise></c:otherwise>
+													</c:choose></td>
+												<td>${resultadoEquipo.puntaje}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<h4>Constructor's Standings cannot be loaded right now.</h4>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="col-md-4 col-md-offset-1 well well-sm">
+					<c:choose>
+						<c:when test="${not errorCurrentRace}">
+							<div id="currentRace">
+								<h4>
+									<c:out value="${race.dates}" />
+								</h4>
+								<div style="" id="currentRaceDiv">
+									<h4>
+										<b><c:out value="${fn:toUpperCase(race.circuit.country.name)}" /> </b>
+										<c:out value="${race.circuit.name}" />
+									</h4>
+								</div>
+								<div id="flag" style="text-align: center;">
+									<img alt="<c:out value="${fn:toUpperCase(race.circuit.country.name)}"/>" title="<c:out value="${fn:toUpperCase(race.circuit.country.name)}"/>" src="assets/img/Races/flag-<c:out value="${fn:replace(fn:toLowerCase(race.circuit.country.name),' ','-')}"/>.png">
+								</div>
+							</div>
+							<div>
+								<div id="raceon">
+									<div>
+										<h3>
+											<a href="http://www.formula1.com/live_timing/">SESSION NOW ON</a>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div id="sleeping" style="display: none">
+								<h3 class="sessionComplete">RACE COMPLETE</h3>
+							</div>
+							<c:set var="today" value="<%=new Date()%>" />
+							<div id="finDeTemporada" style="display: none">
+								<h2>
+									<fmt:formatDate type="date" value="${today}" pattern="yyyy" />
+									FIA FORMULA ONE<br> WORLD CHAMPIONSHIP
+								</h2>
+							</div>
+							<div id="clockSubItem" style="">
+								<h2 id="sessionNameHolder" style="">
+									<b><span id="session_name"></span> </b>
+								</h2>
+								<div id="countdown" style="">
+									<span id="dias" style="color: #4093FD; font-size: 1.7em;"></span>&nbsp;<span id="diasSpan" style="color: #2D6FC2; font-size: 0.9em;">Days</span>&nbsp; <span id="horas" style="color: #4093FD; font-size: 1.6em;"></span>&nbsp;<span style="color: #2D6FC2; font-size: 0.8em;">Hours</span>&nbsp; <span id="min" style="color: #4093FD; font-size: 1.6em;"></span>&nbsp;<span style="color: #2D6FC2; font-size: 0.8em;">Minutes</span>&nbsp; <span
+										id="seg" style="color: #4093FD; font-size: 1.6em;"></span>&nbsp;<span style="color: #2D6FC2; font-size: 0.8em;">Seconds</span>
+								</div>
+							</div>
+							<br>
+							<div id="divSesiones" class="table-responsive">
+								<table id="tablaSesiones" class="table table-condensed table-striped">
+									<c:forEach var="s" items="${race.sessions}">
+										<tr>
+											<td><c:out value="${s.name}" /></td>
+											<td style="text-align: right !important;"><span id="timeSession_<c:out value="${s.local}"/>"><c:out value="${fn:substring(s.date,0,3)}" />&nbsp;<c:out value="${s.startTime}" /> </span></td>
+										</tr>
+									</c:forEach>
+									<tr>
+										<td colspan="2" align="center" valign="bottom" style="text-align: center !important; vertical-align: bottom !important;"><a id="local" href="javascript:void(0);" onclick="return cambiarHora(this)">Convert to my local time</a></td>
+									</tr>
+								</table>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<h4>Error loading current Race</h4>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<footer>
+		<p>
+			<span style="text-align: left; float: left">&copy; <fmt:formatDate type="date" value="${today}" pattern="yyyy" /> PochoF1
+			</span><br /> <span>Powered by: <a href="http://www.formula1.com">&copy; 2003-<fmt:formatDate type="date" value="${today}" pattern="yyyy" /> Formula One World Championship Limited
+			</a> &amp; <a href="http://www.fia.com">&copy; <fmt:formatDate type="date" value="${today}" pattern="yyyy" /> FIA
+			</a>
+			</span>
+		</p>
+	</footer>
+	<!-- scripts -->
+	<script src="assets/js/jquery-1.11.0.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.2.custom.min.js"></script>
+	<script src="assets/js/theme.js"></script>
+	<script type="text/javascript" src="assets/js/clock/customCountdown.js"></script>
+	<script src="assets/datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="assets/js/functions.js"></script>
+	<jsp:include page="analytics.jsp"></jsp:include>
+</body>
+</html>

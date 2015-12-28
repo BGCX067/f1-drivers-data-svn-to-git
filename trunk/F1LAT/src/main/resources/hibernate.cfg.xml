@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/f1lat?autoReconnect=true</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">1234</property>
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://${OPENSHIFT_DB_HOST}:${OPENSHIFT_DB_PORT}/pochof1db</property>
+		<property name="hibernate.connection.username">${OPENSHIFT_MYSQL_DB_USERNAME}</property>
+		<property name="hibernate.connection.password">${OPENSHIFT_MYSQL_DB_PASSWORD}</property> -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.default_schema">f1lat</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.show_sql">true</property>
+		
+		
+		<!-- C3P0 -->
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.max_size">200</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
+		<!-- <property name="testConnectionOnCheckin">false</property>
+		<property name="testConnectionOnCheckout">true</property> -->
+		<property name="hibernate.c3p0.preferredTestQuery">select 1;</property>
+		
+		<!-- Mappings -->
+		<mapping class="com.pochoF1.stats.Carrera"></mapping>
+		<mapping class="com.pochoF1.stats.Circuito"></mapping>
+		<mapping class="com.pochoF1.stats.Clasificacion"></mapping>
+		<mapping class="com.pochoF1.stats.Equipo"></mapping>
+		<mapping class="com.pochoF1.stats.Estado"></mapping>
+		<mapping class="com.pochoF1.stats.ParadaBox"></mapping>
+		<mapping class="com.pochoF1.stats.Piloto"></mapping>
+		<mapping class="com.pochoF1.stats.Resultado"></mapping>
+		<mapping class="com.pochoF1.stats.ResultadoEquipo"></mapping>
+		<mapping class="com.pochoF1.stats.ResultadoPiloto"></mapping>
+		<mapping class="com.pochoF1.stats.ResultadoPuntajeEquipo"></mapping>
+		<mapping class="com.pochoF1.stats.Temporada"></mapping>
+		<mapping class="com.pochoF1.stats.Vuelta"></mapping>
+	</session-factory>
+</hibernate-configuration>
